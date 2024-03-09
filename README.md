@@ -8,11 +8,11 @@ npx create-next-app@latest appName
 ## Libraries
 
 ```sh
-npm install @clerk/nextjs@4.26.1 @prisma/client@5.5.2 @tanstack/react-query@5.8.1 @tanstack/react-query-devtools@5.8.1 axios@1.6.1  openai@4.14.2   react-hot-toast@2.4.1 react-icons@4.11.0
+npm install @clerk/nextjs@4.26.1 @prisma/client@5.5.2 @tanstack/react-query@5.8.1 @tanstack/react-query-devtools@5.8.1 axios@1.6.1 openai@4.14.2 react-hot-toast@2.4.1 react-icons@4.11.0
 ```
 
 ```sh
-npm install -D @tailwindcss/typography@0.5.10  daisyui@3.9.4 prisma@5.5.2
+npm install -D @tailwindcss/typography@0.5.10 daisyui@3.9.4 prisma@5.5.2
 ```
 
 ## DaisyUI
@@ -45,14 +45,14 @@ app/layout.js
 export const metadata = {
   title: 'GPTGenius',
   description:
-    'GPTGenius: Your AI language companion. Powered by OpenAI, it enhances your conversations, content creation, and more!',
-};
+    'GPTGenius: Your AI language companion. Powered by OpenAI, it enhances your conversations, content creation, and more!'
+}
 ```
 
 app/page.js
 
 ```js
-import Link from 'next/link';
+import Link from 'next/link'
 const HomePage = () => {
   return (
     <div className='hero min-h-screen bg-base-200'>
@@ -60,8 +60,8 @@ const HomePage = () => {
         <div className='max-w-md'>
           <h1 className='text-6xl font-bold text-primary'>GPTGenius</h1>
           <p className='py-6 text-lg leading-loose'>
-            GPTGenius: Your AI language companion. Powered by OpenAI, it
-            enhances your conversations, content creation, and more!
+            GPTGenius: Your AI language companion. Powered by OpenAI, it enhances your
+            conversations, content creation, and more!
           </p>
           <Link href='/chat' className='btn btn-secondary '>
             Get Started
@@ -69,10 +69,10 @@ const HomePage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage
 ```
 
 ## Clerk
@@ -88,8 +88,8 @@ npm install @clerk/nextjs
 ```
 
 ```js
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = your_publishable_key;
-CLERK_SECRET_KEY = your_secret_key;
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY = your_publishable_key
+CLERK_SECRET_KEY = your_secret_key
 ```
 
 Environment variables with this `NEXT_PUBLIC_` prefix are exposed to client-side JavaScript code, while those without the prefix are only accessible on the server-side and are not exposed to the client-side code.
@@ -99,13 +99,13 @@ NEXT_PUBLIC_
 ```
 
 ```js
-const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+const apiKey = process.env.NEXT_PUBLIC_API_KEY
 ```
 
 layout.js
 
 ```js
-import { ClerkProvider } from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs'
 
 export default function RootLayout({ children }) {
   return (
@@ -114,25 +114,25 @@ export default function RootLayout({ children }) {
         <body>{children}</body>
       </html>
     </ClerkProvider>
-  );
+  )
 }
 ```
 
 middleware.ts
 
 ```js
-import { authMiddleware } from '@clerk/nextjs';
+import { authMiddleware } from '@clerk/nextjs'
 
 // This example protects all routes including api/trpc routes
 // Please edit this to allow other routes to be public as needed.
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your Middleware
 export default authMiddleware({
-  publicRoutes: ['/'],
-});
+  publicRoutes: ['/']
+})
 
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
-};
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)']
+}
 ```
 
 ## Challenge - Custom SignUp and SignIn Pages
@@ -143,31 +143,31 @@ export const config = {
 app/sign-up/[[...sign-up]]/page.js
 
 ```js
-import { SignUp } from '@clerk/nextjs';
+import { SignUp } from '@clerk/nextjs'
 
 const SignUpPage = () => {
   return (
     <div className='min-h-screen flex justify-center items-center'>
       <SignUp />
     </div>
-  );
-};
-export default SignUpPage;
+  )
+}
+export default SignUpPage
 ```
 
 app/sign-in/[[...sign-in]]/page.js
 
 ```js
-import { SignIn } from '@clerk/nextjs';
+import { SignIn } from '@clerk/nextjs'
 
 const SignInPage = () => {
   return (
     <div className='min-h-screen flex justify-center items-center'>
       <SignIn />
     </div>
-  );
-};
-export default SignInPage;
+  )
+}
+export default SignInPage
 ```
 
 .env.local
@@ -207,8 +207,8 @@ import { FaBeer } from 'react-icons/fa';
 layout.js
 
 ```js
-import { FaBarsStaggered } from 'react-icons/fa6';
-import Sidebar from '@/components/Sidebar';
+import { FaBarsStaggered } from 'react-icons/fa6'
+import Sidebar from '@/components/Sidebar'
 const layout = ({ children }) => {
   return (
     <div className='drawer lg:drawer-open'>
@@ -217,8 +217,7 @@ const layout = ({ children }) => {
         {/* Page content here */}
         <label
           htmlFor='my-drawer-2'
-          className='drawer-button lg:hidden fixed top-6 right-6'
-        >
+          className='drawer-button lg:hidden fixed top-6 right-6'>
           <FaBarsStaggered className='w-8 h-8 text-primary' />
         </label>
         <div className='bg-base-200 px-8 py-12 min-h-screen'>{children}</div>
@@ -227,14 +226,13 @@ const layout = ({ children }) => {
         <label
           htmlFor='my-drawer-2'
           aria-label='close sidebar'
-          className='drawer-overlay'
-        ></label>
+          className='drawer-overlay'></label>
         <Sidebar />
       </div>
     </div>
-  );
-};
-export default layout;
+  )
+}
+export default layout
 ```
 
 ## Sidebar
@@ -244,9 +242,9 @@ export default layout;
 Sidebar.jsx
 
 ```js
-import SidebarHeader from './SidebarHeader';
-import NavLinks from './NavLinks';
-import MemberProfile from './MemberProfile';
+import SidebarHeader from './SidebarHeader'
+import NavLinks from './NavLinks'
+import MemberProfile from './MemberProfile'
 
 const Sidebar = () => {
   return (
@@ -258,9 +256,9 @@ const Sidebar = () => {
       {/* third row */}
       <MemberProfile />
     </div>
-  );
-};
-export default Sidebar;
+  )
+}
+export default Sidebar
 ```
 
 ## SidebarHeader
@@ -268,8 +266,8 @@ export default Sidebar;
 - create ThemeToggle
 
 ```js
-import ThemeToggle from './ThemeToggle';
-import { SiOpenaigym } from 'react-icons/si';
+import ThemeToggle from './ThemeToggle'
+import { SiOpenaigym } from 'react-icons/si'
 
 const SidebarHeader = () => {
   return (
@@ -278,9 +276,9 @@ const SidebarHeader = () => {
       <h2 className='text-xl font-extrabold text-primary mr-auto'>GPTGenius</h2>
       <ThemeToggle />
     </div>
-  );
-};
-export default SidebarHeader;
+  )
+}
+export default SidebarHeader
 ```
 
 ## Challenge - NavLinks
@@ -312,30 +310,30 @@ This component is responsible for rendering navigation links based on the `links
 ## Solution - NavLinks
 
 ```js
-import Link from 'next/link';
+import Link from 'next/link'
 const links = [
   { href: '/chat', label: 'chat' },
   { href: '/tours', label: 'tours' },
   { href: '/tours/new-tour', label: 'new tour' },
-  { href: '/profile', label: 'profile' },
-];
+  { href: '/profile', label: 'profile' }
+]
 
 const NavLinks = () => {
   return (
     <ul className='menu  text-base-content'>
-      {links.map((link) => {
+      {links.map(link => {
         return (
           <li key={link.href}>
             <Link href={link.href} className='capitalize'>
               {link.label}
             </Link>
           </li>
-        );
+        )
       })}
     </ul>
-  );
-};
-export default NavLinks;
+  )
+}
+export default NavLinks
 ```
 
 ## Challenge - MemberProfile
@@ -368,18 +366,18 @@ This component fetches the currently authenticated user and displays their email
 ## Solution - MemberProfile
 
 ```js
-import { UserButton, currentUser, auth } from '@clerk/nextjs';
+import { UserButton, currentUser, auth } from '@clerk/nextjs'
 const MemberProfile = async () => {
-  const user = await currentUser();
-  const { userId } = auth();
+  const user = await currentUser()
+  const { userId } = auth()
   return (
     <div className='px-4 flex items-center gap-2'>
       <UserButton afterSignOutUrl='/' />
       <p>{user.emailAddresses[0].emailAddress}</p>
     </div>
-  );
-};
-export default MemberProfile;
+  )
+}
+export default MemberProfile
 ```
 
 ## Challenge - ThemeToggle
@@ -432,24 +430,24 @@ tailwind.config.js
 ```
 
 ```js
-'use client';
+'use client'
 
-import { BsMoonFill, BsSunFill } from 'react-icons/bs';
-import { useState } from 'react';
+import { BsMoonFill, BsSunFill } from 'react-icons/bs'
+import { useState } from 'react'
 
 const themes = {
   winter: 'winter',
-  dracula: 'dracula',
-};
+  dracula: 'dracula'
+}
 
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState(themes.winter);
+  const [theme, setTheme] = useState(themes.winter)
 
   const toggleTheme = () => {
-    const newTheme = theme === themes.winter ? themes.dracula : themes.winter;
-    document.documentElement.setAttribute('data-theme', newTheme);
-    setTheme(newTheme);
-  };
+    const newTheme = theme === themes.winter ? themes.dracula : themes.winter
+    document.documentElement.setAttribute('data-theme', newTheme)
+    setTheme(newTheme)
+  }
 
   return (
     <button onClick={toggleTheme} className='btn btn-sm btn-outline'>
@@ -459,9 +457,9 @@ const ThemeToggle = () => {
         <BsSunFill className='h-4 w-4' />
       )}
     </button>
-  );
-};
-export default ThemeToggle;
+  )
+}
+export default ThemeToggle
 ```
 
 ## Challenge - Profile Page
@@ -479,11 +477,11 @@ This component serves as a page for displaying the user's profile information. I
 ## Solution - Profile Page
 
 ```js
-import { UserProfile } from '@clerk/nextjs';
+import { UserProfile } from '@clerk/nextjs'
 const UserProfilePage = () => {
-  return <UserProfile />;
-};
-export default UserProfilePage;
+  return <UserProfile />
+}
+export default UserProfilePage
 ```
 
 ## Challenge - Add React-Hot-Toast Library
@@ -497,15 +495,15 @@ export default UserProfilePage;
 app/providers.jsx
 
 ```js
-'use client';
-import { Toaster } from 'react-hot-toast';
+'use client'
+import { Toaster } from 'react-hot-toast'
 export default function Providers({ children }) {
   return (
     <>
       <Toaster position='top-center' />
       {children}
     </>
-  );
+  )
 }
 ```
 
@@ -548,17 +546,17 @@ This component represents a chat interface where users can send messages. It use
 - import in app/(dashboard)/chat/page.js
 
 ```js
-'use client';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+'use client'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 const Chat = () => {
-  const [text, setText] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState('')
+  const [messages, setMessages] = useState([])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const handleSubmit = e => {
+    e.preventDefault()
+  }
 
   return (
     <div className='min-h-[calc(100vh-6rem)] grid grid-rows-[1fr,auto]'>
@@ -573,7 +571,7 @@ const Chat = () => {
             className='input input-bordered join-item w-full'
             value={text}
             required
-            onChange={(e) => setText(e.target.value)}
+            onChange={e => setText(e.target.value)}
           />
           <button className='btn btn-primary join-item' type='submit'>
             ask question
@@ -581,9 +579,9 @@ const Chat = () => {
         </div>
       </form>
     </div>
-  );
-};
-export default Chat;
+  )
+}
+export default Chat
 ```
 
 ## React Query
@@ -598,27 +596,27 @@ npm i @tanstack/react-query @tanstack/react-query-devtools
 ### Setup
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // the data will be considered fresh for 1 minute
-      staleTime: 60 * 1000,
-    },
-  },
-});
+      staleTime: 60 * 1000
+    }
+  }
+})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
     <App />
     <ReactQueryDevtools initialIsOpen={false} />
   </QueryClientProvider>
-);
+)
 ```
 
 ### UseQuery
@@ -628,44 +626,44 @@ const Items = () => {
   const { isPending, isError, data } = useQuery({
     queryKey: ['tasks'],
     // A query function can be literally any function that returns a promise.
-    queryFn: () => axios.get('/someUrl'),
-  });
+    queryFn: () => axios.get('/someUrl')
+  })
 
   if (isPending) {
-    return <p>Loading...</p>;
+    return <p>Loading...</p>
   }
 
   if (isError) {
-    return <p>Error...</p>;
+    return <p>Error...</p>
   }
   return (
     <div className='items'>
-      {data.taskList.map((item) => {
-        return <SingleItem key={item.id} item={item} />;
+      {data.taskList.map(item => {
+        return <SingleItem key={item.id} item={item} />
       })}
     </div>
-  );
-};
-export default Items;
+  )
+}
+export default Items
 ```
 
 ### UseMutation
 
 ```js
 const { mutate, isPending, data } = useMutation({
-  mutationFn: (taskTitle) => axios.post('/', { title: taskTitle }),
+  mutationFn: taskTitle => axios.post('/', { title: taskTitle }),
   onSuccess: () => {
     // do something
   },
   onError: () => {
     // do something
-  },
-});
+  }
+})
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  mutate(newItemName);
-};
+const handleSubmit = e => {
+  e.preventDefault()
+  mutate(newItemName)
+}
 ```
 
 ## React Query and Next.js
@@ -676,14 +674,14 @@ const handleSubmit = (e) => {
 
 ```js
 // In Next.js, this file would be called: app/providers.jsx
-'use client';
+'use client'
 
 // We can not useState or useRef in a server component, which is why we are
 // extracting this part out into it's own file with 'use client' on top
-import { useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Toaster } from 'react-hot-toast';
+import { useState } from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Toaster } from 'react-hot-toast'
 export default function Providers({ children }) {
   const [queryClient] = useState(
     () =>
@@ -692,11 +690,11 @@ export default function Providers({ children }) {
           queries: {
             // With SSR, we usually want to set some default staleTime
             // above 0 to avoid refetching immediately on the client
-            staleTime: 60 * 1000,
-          },
-        },
+            staleTime: 60 * 1000
+          }
+        }
       })
-  );
+  )
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -704,7 +702,7 @@ export default function Providers({ children }) {
       {children}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-  );
+  )
 }
 ```
 
@@ -713,54 +711,50 @@ export default function Providers({ children }) {
 chat/page.js
 
 ```js
-import Chat from '@/components/Chat';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
+import Chat from '@/components/Chat'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 export default async function ChatPage() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient()
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <Chat />
     </HydrationBoundary>
-  );
+  )
 }
 ```
 
 utils/actions.js
 
 ```js
-'use server';
+'use server'
 
-export const generateChatResponse = async (chatMessage) => {
-  console.log(chatMessage);
-  return 'awesome';
-};
+export const generateChatResponse = async chatMessage => {
+  console.log(chatMessage)
+  return 'awesome'
+}
 ```
 
 components/Chat.jsx
 
 ```js
-'use client';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
-import { useMutation } from '@tanstack/react-query';
-import { generateChatResponse } from '@/utils/actions';
+'use client'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+import { useMutation } from '@tanstack/react-query'
+import { generateChatResponse } from '@/utils/actions'
 const Chat = () => {
-  const [text, setText] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState('')
+  const [messages, setMessages] = useState([])
 
   const { mutate } = useMutation({
-    mutationFn: (message) => generateChatResponse(message),
-  });
+    mutationFn: message => generateChatResponse(message)
+  })
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    mutate(text);
-  };
-};
+  const handleSubmit = e => {
+    e.preventDefault()
+    mutate(text)
+  }
+}
 ```
 
 ## OPENAI API
@@ -807,51 +801,51 @@ export const generateChatResponse = async (message) => {
 utils/actions
 
 ```js
-export const generateChatResponse = async (chatMessages) => {
+export const generateChatResponse = async chatMessages => {
   try {
     const response = await openai.chat.completions.create({
       messages: [
         { role: 'system', content: 'you are a helpful assistant' },
-        ...chatMessages,
+        ...chatMessages
       ],
       model: 'gpt-3.5-turbo',
-      temperature: 0,
-    });
-    return response.choices[0].message;
+      temperature: 0
+    })
+    return response.choices[0].message
   } catch (error) {
-    return null;
+    return null
   }
-};
+}
 ```
 
 Chat.jsx
 
 ```js
 const Chat = () => {
-  const [text, setText] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState('')
+  const [messages, setMessages] = useState([])
   const { mutate, isPending, data } = useMutation({
-    mutationFn: (query) => generateChatResponse([...messages, query]),
+    mutationFn: query => generateChatResponse([...messages, query]),
 
-    onSuccess: (data) => {
+    onSuccess: data => {
       if (!data) {
-        toast.error('Something went wrong...');
-        return;
+        toast.error('Something went wrong...')
+        return
       }
-      setMessages((prev) => [...prev, data]);
+      setMessages(prev => [...prev, data])
     },
-    onError: (error) => {
-      toast.error('Something went wrong...');
-    },
-  });
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const query = { role: 'user', content: text };
-    mutate(query);
-    setMessages((prev) => [...prev, query]);
-    setText('');
-  };
-};
+    onError: error => {
+      toast.error('Something went wrong...')
+    }
+  })
+  const handleSubmit = e => {
+    e.preventDefault()
+    const query = { role: 'user', content: text }
+    mutate(query)
+    setMessages(prev => [...prev, query])
+    setText('')
+  }
+}
 ```
 
 ## Messages
@@ -862,32 +856,27 @@ Chat.jsx
 return (
   <div>
     {messages.map(({ role, content }, index) => {
-      const avatar = role == 'user' ? '👤' : '🤖';
-      const bcg = role == 'user' ? 'bg-base-200' : 'bg-base-100';
+      const avatar = role == 'user' ? '👤' : '🤖'
+      const bcg = role == 'user' ? 'bg-base-200' : 'bg-base-100'
       return (
         <div
           key={index}
           className={` ${bcg} flex py-6 -mx-8 px-8
-               text-xl leading-loose border-b border-base-300`}
-        >
+               text-xl leading-loose border-b border-base-300`}>
           <span className='mr-4 '>{avatar}</span>
           <p className='max-w-3xl'>{content}</p>
         </div>
-      );
+      )
     })}
     {isPending && <span className='loading'></span>}
   </div>
-);
+)
 
 return (
-  <button
-    className='btn btn-primary join-item'
-    type='submit'
-    disabled={isPending}
-  >
+  <button className='btn btn-primary join-item' type='submit' disabled={isPending}>
     {isPending ? 'please wait' : 'ask question'}
   </button>
-);
+)
 ```
 
 ## Challenge - New Tour Page
@@ -903,35 +892,31 @@ return (
 tours/new-tour/page.js
 
 ```js
-import NewTour from '@/components/NewTour';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
+import NewTour from '@/components/NewTour'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
 export default async function ChatPage() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient()
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <NewTour />
     </HydrationBoundary>
-  );
+  )
 }
 ```
 
 ```js
-'use client';
+'use client'
 
-import toast from 'react-hot-toast';
-import TourInfo from '@/components/TourInfo';
+import toast from 'react-hot-toast'
+import TourInfo from '@/components/TourInfo'
 
 const NewTour = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault()
 
-    const formData = new FormData(e.currentTarget);
-    const destination = Object.fromEntries(formData.entries());
-  };
+    const formData = new FormData(e.currentTarget)
+    const destination = Object.fromEntries(formData.entries())
+  }
 
   return (
     <>
@@ -961,9 +946,9 @@ const NewTour = () => {
         <TourInfo />
       </div>
     </>
-  );
-};
-export default NewTour;
+  )
+}
+export default NewTour
 ```
 
 ## GenerateTourResponse Setup
@@ -972,56 +957,52 @@ actions.js
 
 ```js
 export const getExistingTour = async ({ city, country }) => {
-  return null;
-};
+  return null
+}
 
 export const generateTourResponse = async ({ city, country }) => {
-  return null;
-};
+  return null
+}
 
-export const createNewTour = async (tour) => {
-  return null;
-};
+export const createNewTour = async tour => {
+  return null
+}
 ```
 
 NewTour.jsx
 
 ```js
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  createNewTour,
-  generateTourResponse,
-  getExistingTour,
-} from '@/utils/actions';
-import toast from 'react-hot-toast';
-import TourInfo from '@/components/TourInfo';
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { createNewTour, generateTourResponse, getExistingTour } from '@/utils/actions'
+import toast from 'react-hot-toast'
+import TourInfo from '@/components/TourInfo'
 
 const NewTour = () => {
   const {
     mutate,
     isPending,
-    data: tour,
+    data: tour
   } = useMutation({
-    mutationFn: async (destination) => {
-      const newTour = await generateTourResponse(destination);
+    mutationFn: async destination => {
+      const newTour = await generateTourResponse(destination)
       if (newTour) {
-        return newTour;
+        return newTour
       }
-      toast.error('No matching city found...');
-      return null;
-    },
-  });
+      toast.error('No matching city found...')
+      return null
+    }
+  })
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault()
 
-    const formData = new FormData(e.currentTarget);
-    const destination = Object.fromEntries(formData.entries());
-    mutate(destination);
-  };
+    const formData = new FormData(e.currentTarget)
+    const destination = Object.fromEntries(formData.entries())
+    mutate(destination)
+  }
 
   if (isPending) {
-    return <span className='loading loading-lg'></span>;
+    return <span className='loading loading-lg'></span>
   }
   return (
     <>
@@ -1045,8 +1026,7 @@ const NewTour = () => {
           <button
             className='btn btn-primary join-item'
             type='submit'
-            disabled={isPending}
-          >
+            disabled={isPending}>
             {isPending ? 'please wait...' : 'generate tour'}
           </button>
         </div>
@@ -1055,9 +1035,9 @@ const NewTour = () => {
         <div className='mt-16'>{tour ? <TourInfo tour={tour} /> : null}</div>
       </div>
     </>
-  );
-};
-export default NewTour;
+  )
+}
+export default NewTour
 ```
 
 ## Prompt
@@ -1087,7 +1067,7 @@ Once you have a list, create a one-day tour. Response should be  in the followin
   }
 }
 "stops" property should include only three stops.
-If you can't find info on exact ${city}, or ${city} does not exist, or it's population is less than 1, or it is not located in the following ${country},   return { "tour": null }, with no additional characters.`;
+If you can't find info on exact ${city}, or ${city} does not exist, or it's population is less than 1, or it is not located in the following ${country},   return { "tour": null }, with no additional characters.`
 ```
 
 ## GenerateTourResponse
@@ -1107,30 +1087,30 @@ Once you have a list, create a one-day tour. Response should be  in the followin
   }
 }
 "stops" property should include only three stops.
-If you can't find info on exact ${city}, or ${city} does not exist, or it's population is less than 1, or it is not located in the following ${country},   return { "tour": null }, with no additional characters.`;
+If you can't find info on exact ${city}, or ${city} does not exist, or it's population is less than 1, or it is not located in the following ${country},   return { "tour": null }, with no additional characters.`
 
   try {
     const response = await openai.chat.completions.create({
       messages: [
         { role: 'system', content: 'you are a tour guide' },
-        { role: 'user', content: query },
+        { role: 'user', content: query }
       ],
       model: 'gpt-3.5-turbo',
-      temperature: 0,
-    });
+      temperature: 0
+    })
     // potentially returns a text with error message
-    const tourData = JSON.parse(response.choices[0].message.content);
+    const tourData = JSON.parse(response.choices[0].message.content)
 
     if (!tourData.tour) {
-      return null;
+      return null
     }
 
-    return tourData.tour;
+    return tourData.tour
   } catch (error) {
-    console.log(error);
-    return null;
+    console.log(error)
+    return null
   }
-};
+}
 ```
 
 ## Shorter Prompt
@@ -1150,24 +1130,24 @@ TourInfo.jsx
 
 ```js
 const TourInfo = ({ tour }) => {
-  const { title, description, stops } = tour;
+  const { title, description, stops } = tour
   return (
     <div className='max-w-2xl'>
       <h1 className='text-4xl font-semibold mb-4'>{title}</h1>
       <p className='leading-loose mb-6'>{description}</p>
       <ul>
-        {stops.map((stop) => {
+        {stops.map(stop => {
           return (
             <li key={stop} className='mb-4 bg-base-100 p-4 rounded-xl'>
               <p className='text'>{stop}</p>
             </li>
-          );
+          )
         })}
       </ul>
     </div>
-  );
-};
-export default TourInfo;
+  )
+}
+export default TourInfo
 ```
 
 ## Add Prisma
@@ -1256,17 +1236,17 @@ export const getExistingTour = async ({ city, country }) => {
     where: {
       city_country: {
         city,
-        country,
-      },
-    },
-  });
-};
+        country
+      }
+    }
+  })
+}
 
-export const createNewTour = async (tour) => {
+export const createNewTour = async tour => {
   return prisma.tour.create({
-    data: tour,
-  });
-};
+    data: tour
+  })
+}
 ```
 
 NewTour.jsx
@@ -1296,15 +1276,15 @@ NewTour.jsx
 actions.js
 
 ```js
-export const getAllTours = async (searchTerm) => {
+export const getAllTours = async searchTerm => {
   if (!searchTerm) {
     const tours = await prisma.tour.findMany({
       orderBy: {
-        city: 'asc',
-      },
-    });
+        city: 'asc'
+      }
+    })
 
-    return tours;
+    return tours
   }
 
   const tours = await prisma.tour.findMany({
@@ -1312,22 +1292,22 @@ export const getAllTours = async (searchTerm) => {
       OR: [
         {
           city: {
-            contains: searchTerm,
-          },
+            contains: searchTerm
+          }
         },
         {
           country: {
-            contains: searchTerm,
-          },
-        },
-      ],
+            contains: searchTerm
+          }
+        }
+      ]
     },
     orderBy: {
-      city: 'asc',
-    },
-  });
-  return tours;
-};
+      city: 'asc'
+    }
+  })
+  return tours
+}
 ```
 
 ## All Tours Page
@@ -1336,110 +1316,95 @@ export const getAllTours = async (searchTerm) => {
 - create loading.js in app/tours
 
 ```js
-import ToursPage from '@/components/ToursPage';
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from '@tanstack/react-query';
-import { getAllTours } from '@/utils/actions';
+import ToursPage from '@/components/ToursPage'
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query'
+import { getAllTours } from '@/utils/actions'
 export default async function AllToursPage() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient()
   await queryClient.prefetchQuery({
     queryKey: ['tours'],
-    queryFn: () => getAllTours(),
-  });
+    queryFn: () => getAllTours()
+  })
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <ToursPage />
     </HydrationBoundary>
-  );
+  )
 }
 ```
 
 ## ToursPage
 
 ```js
-'use client';
-import { getAllTours } from '@/utils/actions';
-import { useQuery } from '@tanstack/react-query';
-import ToursList from './ToursList';
+'use client'
+import { getAllTours } from '@/utils/actions'
+import { useQuery } from '@tanstack/react-query'
+import ToursList from './ToursList'
 
 const ToursPage = () => {
   const { data, isPending } = useQuery({
     queryKey: ['tours'],
-    queryFn: () => getAllTours(),
-  });
+    queryFn: () => getAllTours()
+  })
 
-  return (
-    <>
-      {isPending ? (
-        <span className=' loading'></span>
-      ) : (
-        <ToursList data={data} />
-      )}
-    </>
-  );
-};
-export default ToursPage;
+  return <>{isPending ? <span className=' loading'></span> : <ToursList data={data} />}</>
+}
+export default ToursPage
 ```
 
 ## ToursList
 
 ```js
-import TourCard from './TourCard';
+import TourCard from './TourCard'
 const ToursList = ({ data }) => {
-  if (data.length === 0) return <h4 className='text-lg '>No tours found...</h4>;
+  if (data.length === 0) return <h4 className='text-lg '>No tours found...</h4>
 
   return (
     <div className='grid sm:grid-cols-2  lg:grid-cols-4 gap-8'>
-      {data.map((tour) => {
-        return <TourCard key={tour.id} tour={tour} />;
+      {data.map(tour => {
+        return <TourCard key={tour.id} tour={tour} />
       })}
     </div>
-  );
-};
-export default ToursList;
+  )
+}
+export default ToursList
 ```
 
 ## TourCard
 
 ```js
-import Link from 'next/link';
+import Link from 'next/link'
 const TourCard = ({ tour }) => {
-  const { city, title, id, country } = tour;
+  const { city, title, id, country } = tour
 
   return (
-    <Link
-      href={`/tours/${id}`}
-      className='card card-compact rounded-xl bg-base-100'
-    >
+    <Link href={`/tours/${id}`} className='card card-compact rounded-xl bg-base-100'>
       <div className='card-body items-center text-center'>
         <h2 className='card-title text-center'>
           {city}, {country}
         </h2>
       </div>
     </Link>
-  );
-};
-export default TourCard;
+  )
+}
+export default TourCard
 ```
 
 ## Search Functionality
 
 ```js
-'use client';
-import { getAllTours } from '@/utils/actions';
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import ToursList from './ToursList';
+'use client'
+import { getAllTours } from '@/utils/actions'
+import { useQuery } from '@tanstack/react-query'
+import { useState } from 'react'
+import ToursList from './ToursList'
 
 const ToursPage = () => {
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue] = useState('')
   const { data, isPending } = useQuery({
     queryKey: ['tours', searchValue],
-    queryFn: () => getAllTours(searchValue),
-  });
+    queryFn: () => getAllTours(searchValue)
+  })
 
   return (
     <>
@@ -1451,28 +1416,23 @@ const ToursPage = () => {
             className='input input-bordered join-item w-full'
             name='search'
             value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
+            onChange={e => setSearchValue(e.target.value)}
             required
           />
           <button
             className='btn btn-primary join-item'
             type='button'
             disabled={isPending}
-            onClick={() => setSearchValue('')}
-          >
+            onClick={() => setSearchValue('')}>
             {isPending ? 'please wait' : 'reset'}
           </button>
         </div>
       </form>
-      {isPending ? (
-        <span className=' loading'></span>
-      ) : (
-        <ToursList data={data} />
-      )}
+      {isPending ? <span className=' loading'></span> : <ToursList data={data} />}
     </>
-  );
-};
-export default ToursPage;
+  )
+}
+export default ToursPage
 ```
 
 ## Challenge - Single Tour Page
@@ -1486,24 +1446,24 @@ export default ToursPage;
 actions.js
 
 ```js
-export const getSingleTour = async (id) => {
+export const getSingleTour = async id => {
   return prisma.tour.findUnique({
     where: {
-      id,
-    },
-  });
-};
+      id
+    }
+  })
+}
 ```
 
 ```js
-import TourInfo from '@/components/TourInfo';
-import { getSingleTour } from '@/utils/actions';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
+import TourInfo from '@/components/TourInfo'
+import { getSingleTour } from '@/utils/actions'
+import Link from 'next/link'
+import { redirect } from 'next/navigation'
 const SingleTourPage = async ({ params }) => {
-  const tour = await getSingleTour(params.id);
+  const tour = await getSingleTour(params.id)
   if (!tour) {
-    redirect('/tours');
+    redirect('/tours')
   }
   return (
     <div>
@@ -1512,9 +1472,9 @@ const SingleTourPage = async ({ params }) => {
       </Link>
       <TourInfo tour={tour} />
     </div>
-  );
-};
-export default SingleTourPage;
+  )
+}
+export default SingleTourPage
 ```
 
 ## Images
@@ -1530,35 +1490,35 @@ export const generateTourImage = async ({ city, country }) => {
     const tourImage = await openai.images.generate({
       prompt: `a panoramic view of the ${city} ${country}`,
       n: 1,
-      size: '512x512',
-    });
-    return tourImage?.data[0]?.url;
+      size: '512x512'
+    })
+    return tourImage?.data[0]?.url
   } catch (error) {
-    return null;
+    return null
   }
-};
+}
 ```
 
 app/tours/[id]/page.js
 
 ```js
-import TourInfo from '@/components/TourInfo';
-import { generateTourImage } from '@/utils/actions';
-import prisma from '@/utils/prisma';
-import Link from 'next/link';
-import Image from 'next/image';
+import TourInfo from '@/components/TourInfo'
+import { generateTourImage } from '@/utils/actions'
+import prisma from '@/utils/prisma'
+import Link from 'next/link'
+import Image from 'next/image'
 
 const SingleTourPage = async ({ params }) => {
   const tour = await prisma.tour.findUnique({
     where: {
-      id: params.id,
-    },
-  });
+      id: params.id
+    }
+  })
 
   const tourImage = await generateTourImage({
     city: tour.city,
-    country: tour.country,
-  });
+    country: tour.country
+  })
   return (
     <div>
       <Link href='/tours' className='btn btn-secondary mb-12'>
@@ -1580,9 +1540,9 @@ const SingleTourPage = async ({ params }) => {
 
       <TourInfo tour={tour} />
     </div>
-  );
-};
-export default SingleTourPage;
+  )
+}
+export default SingleTourPage
 ```
 
 next.config.js
@@ -1596,19 +1556,19 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'oaidalleapiprodscus.blob.core.windows.net',
         port: '',
-        pathname: '/private/**',
+        pathname: '/private/**'
       },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
         port: '',
-        pathname: '/**',
-      },
-    ],
-  },
-};
+        pathname: '/**'
+      }
+    ]
+  }
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
 ```
 
 ## Alternative
@@ -1624,23 +1584,23 @@ UNSPLASH_API_KEY=7pmB29Xi9rOWHhYpvtuc4edchzh1w0eawUjJwNAqngA
 ```
 
 ```js
-import TourInfo from '@/components/TourInfo';
-import { generateTourImage } from '@/utils/actions';
-import prisma from '@/utils/prisma';
-import Link from 'next/link';
-import Image from 'next/image';
-import axios from 'axios';
-const url = `https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_API_KEY}&query=`;
+import TourInfo from '@/components/TourInfo'
+import { generateTourImage } from '@/utils/actions'
+import prisma from '@/utils/prisma'
+import Link from 'next/link'
+import Image from 'next/image'
+import axios from 'axios'
+const url = `https://api.unsplash.com/search/photos?client_id=${process.env.UNSPLASH_API_KEY}&query=`
 
 const SingleTourPage = async ({ params }) => {
   const tour = await prisma.tour.findUnique({
     where: {
-      id: params.id,
-    },
-  });
+      id: params.id
+    }
+  })
 
-  const { data } = await axios(`${url}${tour.city}`);
-  const tourImage = data?.results[0]?.urls?.raw;
+  const { data } = await axios(`${url}${tour.city}`)
+  const tourImage = data?.results[0]?.urls?.raw
 
   // const tourImage = await generateTourImage({
   //   city: tour.city,
@@ -1667,9 +1627,9 @@ const SingleTourPage = async ({ params }) => {
 
       <TourInfo tour={tour} />
     </div>
-  );
-};
-export default SingleTourPage;
+  )
+}
+export default SingleTourPage
 ```
 
 ## Remove SingIn and SignUp Pages
@@ -1696,18 +1656,18 @@ INVOLVES REFACTORING !!!!
 actions.js
 
 ```js
-export const generateChatResponse = async (chatMessages) => {
+export const generateChatResponse = async chatMessages => {
   try {
     const response = await openai.chat.completions.create({
-      max_tokens: 100,
-    });
+      max_tokens: 100
+    })
 
-    return response.choices[0].message;
+    return response.choices[0].message
   } catch (error) {
-    console.log(error);
-    return null;
+    console.log(error)
+    return null
   }
-};
+}
 ```
 
 ### Clerk Logic
@@ -1740,48 +1700,48 @@ model Token {
 actions.js
 
 ```js
-export const fetchUserTokensById = async (clerkId) => {
+export const fetchUserTokensById = async clerkId => {
   const result = await prisma.token.findUnique({
     where: {
-      clerkId,
-    },
-  });
+      clerkId
+    }
+  })
 
-  return result?.tokens;
-};
+  return result?.tokens
+}
 
-export const generateUserTokensForId = async (clerkId) => {
+export const generateUserTokensForId = async clerkId => {
   const result = await prisma.token.create({
     data: {
-      clerkId,
-    },
-  });
-  return result?.tokens;
-};
+      clerkId
+    }
+  })
+  return result?.tokens
+}
 
-export const fetchOrGenerateTokens = async (clerkId) => {
-  const result = await fetchUserTokensById(clerkId);
+export const fetchOrGenerateTokens = async clerkId => {
+  const result = await fetchUserTokensById(clerkId)
   if (result) {
-    return result.tokens;
+    return result.tokens
   }
-  return (await generateUserTokensForId(clerkId)).tokens;
-};
+  return (await generateUserTokensForId(clerkId)).tokens
+}
 
 export const subtractTokens = async (clerkId, tokens) => {
   const result = await prisma.token.update({
     where: {
-      clerkId,
+      clerkId
     },
     data: {
       tokens: {
-        decrement: tokens,
-      },
-    },
-  });
-  revalidatePath('/profile');
+        decrement: tokens
+      }
+    }
+  })
+  revalidatePath('/profile')
   // Return the new token value
-  return result.tokens;
-};
+  return result.tokens
+}
 ```
 
 ### Generate and Show Tokens
@@ -1789,42 +1749,40 @@ export const subtractTokens = async (clerkId, tokens) => {
 components/MemberProfile.jsx
 
 ```js
-import { fetchOrGenerateTokens } from '@/utils/actions';
-import { UserButton, auth, currentUser } from '@clerk/nextjs';
+import { fetchOrGenerateTokens } from '@/utils/actions'
+import { UserButton, auth, currentUser } from '@clerk/nextjs'
 
 const MemberProfile = async () => {
-  const user = await currentUser();
-  const { userId } = auth();
-  await fetchOrGenerateTokens(userId);
+  const user = await currentUser()
+  const { userId } = auth()
+  await fetchOrGenerateTokens(userId)
   return (
     <div className='px-4 flex items-center gap-2'>
       <UserButton afterSignOutUrl='/' />
       <p>{user.emailAddresses[0].emailAddress}</p>
     </div>
-  );
-};
-export default MemberProfile;
+  )
+}
+export default MemberProfile
 ```
 
 profile/page.js
 
 ```js
-import { fetchUserTokensById } from '@/utils/actions';
-import { UserProfile, auth } from '@clerk/nextjs';
+import { fetchUserTokensById } from '@/utils/actions'
+import { UserProfile, auth } from '@clerk/nextjs'
 
 const ProfilePage = async () => {
-  const { userId } = auth();
-  const currentTokens = await fetchUserTokensById(userId);
+  const { userId } = auth()
+  const currentTokens = await fetchUserTokensById(userId)
   return (
     <div>
-      <h2 className='mb-8 ml-8 text-xl font-extrabold'>
-        Token Amount : {currentTokens}
-      </h2>
+      <h2 className='mb-8 ml-8 text-xl font-extrabold'>Token Amount : {currentTokens}</h2>
       <UserProfile />
     </div>
-  );
-};
-export default ProfilePage;
+  )
+}
+export default ProfilePage
 ```
 
 ### Tours
@@ -1833,8 +1791,8 @@ actions.js
 
 ```js
 export const generateTourResponse = () => {
-  return { tour: tourData.tour, tokens: response.usage.total_tokens };
-};
+  return { tour: tourData.tour, tokens: response.usage.total_tokens }
+}
 ```
 
 components/NewTour.jsx
@@ -1893,9 +1851,9 @@ actions.js
 const generateChatResponse = () => {
   return {
     message: response.choices[0].message,
-    tokens: response.usage.total_tokens,
-  };
-};
+    tokens: response.usage.total_tokens
+  }
+}
 ```
 
 components/Chat.jsx
