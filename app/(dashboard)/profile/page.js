@@ -1,5 +1,7 @@
+const { UserProfile } = require("@clerk/nextjs")
+
 const ProfilePage = () => {
-  return <div>ProfilePage</div>
+  return <UserProfile />
 }
 
 export default ProfilePage

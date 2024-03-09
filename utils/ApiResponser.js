@@ -1,7 +1,9 @@
-const successReponse = (data, code) => Response.status(code).json(data)
+import { NextResponse } from 'next/server'
+
+const successReponse = (data, code) => NextResponse.status(code).json(data)
 
 export const errorResponse = (message, code) =>
-  Response.status(code).json({ error: message, code })
+  NextResponse.json({ error: message }, { status: code })
 export const showAll = (collection, code = 200) =>
   successReponse({ data: collection }, code)
 export const showOne = (model, code = 200) => successReponse({ data: model }, code)
